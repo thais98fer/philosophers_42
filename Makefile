@@ -6,7 +6,7 @@
 #    By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/13 14:07:47 by thfernan          #+#    #+#              #
-#    Updated: 2026/06/13 14:34:24 by thfernan         ###   ########.fr        #
+#    Updated: 2026/06/13 14:59:15 by thfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CFLAGS	= -Wall -Werror -Wextra -g3 -I includes
 #=================================================================#
 
 SRCS	= philoshophers.c \
+			ft_atol.c \
 			sample.c \
 			
 
