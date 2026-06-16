@@ -6,7 +6,7 @@
 #    By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/13 14:07:47 by thfernan          #+#    #+#              #
-#    Updated: 2026/06/16 16:27:38 by thfernan         ###   ########.fr        #
+#    Updated: 2026/06/16 18:18:10 by thfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ SRCS	= 	main.c \
 			init_simulation.c \
 			free_destroy.c \
 			ft_atol.c \
+			routine.c \
+			monitor.c \
+			time.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 13:59:39 by thfernan          #+#    #+#             */
-/*   Updated: 2026/06/16 15:54:59 by thfernan         ###   ########.fr       */
+/*   Updated: 2026/06/16 18:40:07 by thfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -47,17 +48,30 @@ typedef struct s_sim
 }	t_sim;
 
 // Main function
-long long	ft_atol(const char *str);
-int			parse_args(int argc, char **argv, t_sim *sim);
-//int		main(int argc, char **argv);
+long long		ft_atol(const char *str);
+int				parse_args(int argc, char **argv, t_sim *sim);
+void			create_threads(t_sim *sim, pthread_t *monitor);
+void			join_threads(t_sim *sim, pthread_t monitor);
+int				main(int argc, char **argv);
+
+// Monitor
+void			*monitor_routine(void *arg);
+
+// Routine
+void			print_status(t_sim *sim, int id, char *message);
+void			*philo_routine(void *arg);
+
+// Time managment
+unsigned long	get_time_ms(void);
+void			ft_usleep(unsigned long milliseconds);
 
 // Init simulation
-int			init_sim(t_sim *sim, int i);
+int				init_sim(t_sim *sim, int i);
 
 // Free and destroy
-void		destroy_meal_locks(t_sim *sim, int count);
-void		destroy_forks(t_sim *sim);
-void		cleanup_sim(t_sim *sim, int philos_initialized);
-int			clear_philos_and_forks(t_sim *sim);
+void			destroy_meal_locks(t_sim *sim, int count);
+void			destroy_forks(t_sim *sim);
+void			cleanup_sim(t_sim *sim, int philos_initialized);
+int				clear_philos_and_forks(t_sim *sim);
 
 #endif
