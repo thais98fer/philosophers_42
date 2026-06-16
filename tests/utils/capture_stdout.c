@@ -7,6 +7,7 @@ int	start_capture(void)
 	int	fd;
 	int	saved_stdout;
 
+	fflush(stdout);
 	fd = open(CAPTURE_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	if (fd == -1)
 		return (-1);
@@ -32,6 +33,7 @@ char	*end_capture(int saved_stdout)
 	int		fd;
 	ssize_t	n;
 
+	fflush(stdout);
 	dup2(saved_stdout, STDOUT_FILENO);
 	close(saved_stdout);
 	fd = open(CAPTURE_FILE, O_RDONLY);

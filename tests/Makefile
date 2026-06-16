@@ -2,17 +2,22 @@ CC          = cc
 CFLAGS      = -g3 -Wextra -Werror -Wall
 
 # IMPORTANTE: Garanta que nenhum desses arquivos tenha uma função main()
-C_FILES     = ../sample.c
+C_FILES     =	../philosophers.c \
+				../init_simulation.c \
+				../free_destroy.c \
+				../ft_atol.c
 
 UTIL_FILES  = utils/test_log.c \
-              utils/capture_stdout.c
+			  utils/capture_stdout.c
 
 LIBS        =  # -ldl -glfw -pthread -lm
 HEADERS     = -I. -I$(TEST_DIR) -I..
 
-              # Tests section
-              TEST_DIR    = ./
-              TEST_SRCS   = $(TEST_DIR)/test-sample.c
+			  # Tests section
+			  TEST_DIR    = ./
+			  TEST_SRCS   = $(TEST_DIR)/test-ft_atol.c \
+							$(TEST_DIR)/test-parse_args.c \
+							$(TEST_DIR)/test-init_sim.c
 
 TEST_BINS   = $(TEST_SRCS:.c=.out)
 REPORT_LOG  = test_report.log
