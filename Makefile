@@ -6,22 +6,23 @@
 #    By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/13 14:07:47 by thfernan          #+#    #+#              #
-#    Updated: 2026/06/13 14:59:15 by thfernan         ###   ########.fr        #
+#    Updated: 2026/06/16 16:27:38 by thfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -g3 -I includes
+CFLAGS	= -Wall -Werror -Wextra -g3 -I includes -pthread
 
 #=================================================================#
 #                           philo sources                         #
 #=================================================================#
 
-SRCS	= philoshophers.c \
+SRCS	= 	main.c \
+			philosophers.c \
+			init_simulation.c \
+			free_destroy.c \
 			ft_atol.c \
-			sample.c \
-			
 
 OBJS = $(SRCS:.c=.o)
 
@@ -39,18 +40,31 @@ BLUE = \033[34m
 all: $(NAME)
 	@echo "$(GREEN)	-> Philo ready $(RESET)"
 
-val:
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+val: $(NAME)
 	valgrind \
 		--leak-check=full \
-		--show-leak-kind=all \
+		--show-leak-kinds=all \
 		--track-origins=yes \
 		--trace-children=yes \
 		--track-fds=yes \
-		./$(NAME)
+		./$(NAME) 5 800 200 200
+
+helgrind: $(NAME)
+		valgrind \
+		--tool=helgrind \
+		./$(NAME) 5 800 200 200
+
+sanitize: CFLAGS += -fsanitize=thread
+sanitize: re
+	@echo "$(BLUE)Compiled with ThreadSanitizer$(RESET)"
+	./$(NAME) 5 800 200 200
 
 %.o: %.c
 	@echo "$(YELLOW)Compiling $<$(RESET)"
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 unit-tests:
 	@$(MAKE) -C ./tests
@@ -68,4 +82,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re val helgrind sanitize unit-tests
