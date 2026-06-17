@@ -6,19 +6,19 @@
 /*   By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 13:59:39 by thfernan          #+#    #+#             */
-/*   Updated: 2026/06/16 18:40:07 by thfernan         ###   ########.fr       */
+/*   Updated: 2026/06/17 19:45:12 by thfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/time.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -39,8 +39,8 @@ typedef struct s_sim
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
 	unsigned long	start_time;
-	int				must_eat; // -1 se não especificado
-	int				stop_sim; // flag de parada (0 = rodando, 1 = parar)
+	int				must_eat;
+	int				stop_sim;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	*stop_lock;

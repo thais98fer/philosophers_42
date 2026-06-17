@@ -6,7 +6,7 @@
 /*   By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 14:54:56 by thfernan          #+#    #+#             */
-/*   Updated: 2026/06/16 18:40:49 by thfernan         ###   ########.fr       */
+/*   Updated: 2026/06/17 15:59:04 by thfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	print_status(t_sim *sim, int id, char *message)
 {
-	pthread_mutex_lock(sim->print_lock);
+	pthread_mutex_lock(sim->stop_lock);
 	if (!sim->stop_sim)
 	{
 		pthread_mutex_lock(sim->print_lock);
 		printf("%lu %d %s\n", get_time_ms() - sim->start_time, id, message);
 		pthread_mutex_unlock(sim->print_lock);
 	}
-	pthread_mutex_unlock(sim->print_lock);
+	pthread_mutex_unlock(sim->stop_lock);
 }
 
 void	create_threads(t_sim *sim, pthread_t *monitor)

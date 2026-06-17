@@ -6,7 +6,7 @@
 /*   By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 13:06:03 by thfernan          #+#    #+#             */
-/*   Updated: 2026/06/16 15:20:36 by thfernan         ###   ########.fr       */
+/*   Updated: 2026/06/17 17:07:11 by thfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	init_philos_array(t_sim *sim)
 	return (0);
 }
 
-static int	init_global_locks(t_sim * sim)
+static int	init_global_locks(t_sim *sim)
 {
 	sim->print_lock = malloc(sizeof(pthread_mutex_t));
 	sim->stop_lock = malloc(sizeof(pthread_mutex_t));

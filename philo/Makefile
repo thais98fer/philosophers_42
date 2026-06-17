@@ -6,7 +6,7 @@
 #    By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/13 14:07:47 by thfernan          #+#    #+#              #
-#    Updated: 2026/06/16 18:18:10 by thfernan         ###   ########.fr        #
+#    Updated: 2026/06/17 17:36:02 by thfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS	= -Wall -Werror -Wextra -g3 -I includes -pthread
 #=================================================================#
 
 SRCS	= 	main.c \
-			philosophers.c \
+			parse.c \
 			init_simulation.c \
 			free_destroy.c \
 			ft_atol.c \
@@ -44,7 +44,8 @@ all: $(NAME)
 	@echo "$(GREEN)	-> Philo ready $(RESET)"
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@echo "$(BLUE)Compiled with -Wall -Werror -Wextra -g3 -I includes -pthread $(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 val: $(NAME)
 	valgrind \
@@ -53,17 +54,17 @@ val: $(NAME)
 		--track-origins=yes \
 		--trace-children=yes \
 		--track-fds=yes \
-		./$(NAME) 5 800 200 200
+		./$(NAME) 5 800 200 200 3
 
 helgrind: $(NAME)
 		valgrind \
 		--tool=helgrind \
-		./$(NAME) 5 800 200 200
+		./$(NAME) 5 1000000 200 200
 
 sanitize: CFLAGS += -fsanitize=thread
 sanitize: re
 	@echo "$(BLUE)Compiled with ThreadSanitizer$(RESET)"
-	./$(NAME) 5 800 200 200
+	./$(NAME) 5 800 200 200 3
 
 %.o: %.c
 	@echo "$(YELLOW)Compiling $<$(RESET)"
@@ -75,13 +76,13 @@ unit-tests:
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS)
 	@rm -f *.o
-	@$(MAKE) clean -C ./tests
+	@$(MAKE) --no-print-directory clean -C ./tests
 
 fclean: clean
-	@echo "$(RED)Removing $(NAME)...$(RESET)"
+	@echo "$(RED) -> Philo removed$(RESET)"
 	@rm -f $(NAME) $(BONUS)
 	@rm -rf ./test/test_report.log
-	@$(MAKE) fclean -C ./tests
+	@$(MAKE) --no-print-directory fclean -C ./tests
 
 re: fclean all
 
