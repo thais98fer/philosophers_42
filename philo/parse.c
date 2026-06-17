@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 13:59:20 by thfernan          #+#    #+#             */
-/*   Updated: 2026/06/16 15:19:29 by thfernan         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:11:19 by thfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	validate_numbers(int argc, char **argv)
 	{
 		if (!is_valid_number(argv[i]))
 		{
-			printf("Error: invalid type of argument, must be only numbers\n");
+			printf("Error: invalid type of argument\n");
 			return (1);
 		}
 		i++;
@@ -49,7 +49,7 @@ static int	validate_values(t_sim *sim, int argc)
 	if (sim->number_philos <= 0 || sim->time_to_die <= 0
 		|| sim->time_to_eat <= 0 || sim->time_to_sleep <= 0)
 	{
-		printf("Error: arguments must be positive\n");
+		printf("Error: arguments must be above zero and < INT_MAX\n");
 		return (1);
 	}
 	if (argc == 6 && sim->must_eat <= 0)
@@ -70,7 +70,8 @@ int	parse_args(int argc, char **argv, t_sim *sim)
 	if (argc != 5 && argc != 6)
 	{
 		printf("Error: wrong number of arguments\n");
-		printf("[Number_of_philosopheres] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_times_each_must_eat]");
+		printf("[Number_of_philosophers] [time_to_die] [time_to_eat] \
+[time_to_sleep] [number_of_times_each_philo_must_eat]");
 		return (1);
 	}
 	if (validate_numbers(argc, argv))

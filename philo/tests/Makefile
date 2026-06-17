@@ -2,7 +2,7 @@ CC          = cc
 CFLAGS      = -g3 -Wextra -Werror -Wall
 
 # IMPORTANTE: Garanta que nenhum desses arquivos tenha uma função main()
-C_FILES     =	../philosophers.c \
+C_FILES     =	../parse.c \
 				../init_simulation.c \
 				../free_destroy.c \
 				../ft_atol.c
@@ -71,7 +71,7 @@ $(TEST_DIR)/%.out: $(TEST_DIR)/%.c
 	fi
 
 clean:
-	rm -f *.out
+	@rm -f *.out
 
 fclean: clean
 	@rm -rf $(REPORT_LOG)
