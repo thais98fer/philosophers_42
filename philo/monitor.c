@@ -6,7 +6,7 @@
 /*   By: thfernan <thfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 17:24:02 by thfernan          #+#    #+#             */
-/*   Updated: 2026/06/16 18:43:00 by thfernan         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:15:42 by thfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_death(t_sim *sim, int i)
 	now = get_time_ms();
 	if (now - sim->philos[i].time_last_meal > sim->time_to_die)
 	{
-		print_status(sim, sim->philos[i].index, "died");
+		print_status(sim, sim->philos[i].index, "died 💀");
 		pthread_mutex_lock(sim->stop_lock);
 		sim->stop_sim = 1;
 		pthread_mutex_unlock(sim->stop_lock);
